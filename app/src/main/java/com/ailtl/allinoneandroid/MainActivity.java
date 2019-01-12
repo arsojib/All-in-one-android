@@ -3,8 +3,10 @@ package com.ailtl.allinoneandroid;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.NotificationCompat;
@@ -94,5 +96,19 @@ public class MainActivity extends AppCompatActivity {
 //        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 //        notificationManager.notify(notificationCode, notificationBuilder.build());
 //    }
+
+    private void setListener() {
+        BroadcastReceiver broadcastReceiver = null;
+        try {
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction("Broadcast_name");
+            registerReceiver(broadcastReceiver, intentFilter);
+        } catch (IllegalArgumentException ignored) {
+        }
+
+        Intent intent = new Intent();
+        intent.setAction("Broadcast_name");
+        sendBroadcast(intent);
+    }
 
 }
